@@ -1,11 +1,71 @@
 <h1>Lista de Productos (Vista Genérica)</h1>
 
-<ul>
+<ul class="producto-lista">
     {% for p in productos %}
         <li>
-            {{ p.nombre }} – {{ p.precio }}
+            <span class="nombre">{{ p.nombre }}</span> – 
+            <span class="precio">${{ p.precio }}</span>
         </li>
     {% empty %}
         <li>No hay productos</li>
     {% endfor %}
 </ul>
+
+<style>
+    /* Estilos generales */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 25px;
+    }
+
+    /* Lista de productos */
+    .producto-lista {
+        list-style: none; /* Quitar viñetas */
+        padding: 0;
+        max-width: 600px;
+        margin: 0 auto; /* Centrar la lista */
+    }
+
+    .producto-lista li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 12px 20px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    /* Efecto hover */
+    .producto-lista li:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Estilos de nombre y precio */
+    .nombre {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .precio {
+        color: #27ae60;
+        font-weight: bold;
+    }
+
+    /* Mensaje de lista vacía */
+    .producto-lista li:empty {
+        text-align: center;
+        color: #999;
+        font-style: italic;
+    }
+</style>
