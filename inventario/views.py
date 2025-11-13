@@ -5,6 +5,7 @@ from django.views.generic import ListView
 from django.http import JsonResponse
 from .models import Categoria
 import json
+from .forms import CategoriaForm
 
 def inicio(request):
     return render(request, 'inventario/index.html')
@@ -61,3 +62,13 @@ def crear_categoria_ajax(request):
             "nombre": categoria.nombre
         })
     return JsonResponse({"ok": False}, status=400)
+
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_producto')  # vuelve al formulario de producto
+    else:
+        form = CategoriaForm()
+    return render(request, 'inventario/crear_categoria.html', {'form': form})

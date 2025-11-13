@@ -33,7 +33,7 @@
                     {{ form.categoria }}
                     <!-- Botón para abrir el modal -->
                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalCategoria">
-                        Nueva categoría
+                        <a href="{% url 'crear_categoria' %}" class="btn btn-info mt-3">+ Nueva Categoría</a>
                     </button>
                 </div>
             </div>
