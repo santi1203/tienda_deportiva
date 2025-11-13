@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Producto
 from .forms import ProductoForm
 from django.views.generic import ListView
+from django.http import JsonResponse
+from .models import Categoria
+import json
 
 def inicio(request):
     return render(request, 'inventario/index.html')
@@ -44,3 +47,17 @@ class ProductoListView(ListView):
     model = Producto
     template_name = 'inventario/lista_productos_generica.html'
     context_object_name = 'productos'
+
+def crear_categoria_ajax(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        categoria = Categoria.objects.create(
+            nombre=data["nombre"],
+            descripcion=data.get("descripcion", "")
+        )
+        return JsonResponse({
+            "ok": True,
+            "id": categoria.id,
+            "nombre": categoria.nombre
+        })
+    return JsonResponse({"ok": False}, status=400)

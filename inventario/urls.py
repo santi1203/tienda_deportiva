@@ -11,7 +11,8 @@ urlpatterns = [
     path('', views.inicio, name='inicio'),
     path('productos/', views.lista_productos, name='lista_productos'),
     path('producto/<int:producto_id>/eliminar/', views.eliminar_producto, name='eliminar_producto'),
-    
+    path('categoria/crear/ajax/', views.crear_categoria_ajax, name='crear_categoria_ajax'),
+
     #Vista genérica
     path('productos-generica/', ProductoListView.as_view(), name='productos_generica'),
 ]
