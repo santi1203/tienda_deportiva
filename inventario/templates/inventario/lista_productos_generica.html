@@ -1,0 +1,11 @@
+<h1>Lista de Productos (Vista Genérica)</h1>
+
+<ul>
+    {% for p in productos %}
+        <li>
+            {{ p.nombre }} – {{ p.precio }}
+        </li>
+    {% empty %}
+        <li>No hay productos</li>
+    {% endfor %}
+</ul>

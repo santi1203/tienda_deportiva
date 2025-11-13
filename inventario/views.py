@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Producto
 from .forms import ProductoForm
+from django.views.generic import ListView
 
 def inicio(request):
     return render(request, 'inventario/index.html')
@@ -33,3 +34,13 @@ def editar_producto(request, producto_id):
     else:
         form = ProductoForm(instance=producto)
     return render(request, 'inventario/editar_producto.html', {'form': form, 'producto': producto})
+
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    producto.delete()
+    return redirect('lista_productos')
+
+class ProductoListView(ListView):
+    model = Producto
+    template_name = 'inventario/lista_productos_generica.html'
+    context_object_name = 'productos'

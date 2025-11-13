@@ -1,13 +1,58 @@
 {% extends 'inventario/base.html' %}
 {% block content %}
-<h2>Listado de Productos</h2>
-<ul>
+
+<h2 style="text-align:center; margin-bottom:40px;">Listado de Productos</h2>
+
+<div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+">
+
     {% for producto in productos %}
-        <li>
-            <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a>
-            ({{ producto.categoria }})
-        </li>
+    <div style="
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    ">
+        <h3 style="margin-bottom:10px;">{{ producto.nombre }}</h3>
+        <p style="margin-bottom:15px; color:#666;">Categoría: {{ producto.categoria }}</p>
+
+        <div style="display:flex; justify-content:center; gap:10px;">
+
+            <!-- Ver Detalle -->
+            <a href="{% url 'detalle_producto' producto.id %}" 
+               style="padding:8px 12px; background:#0a5eff; color:white; border-radius:6px; text-decoration:none; font-weight:bold;">
+                Ver
+            </a>
+
+            <!-- Editar -->
+            <a href="{% url 'editar_producto' producto.id %}" 
+               style="padding:8px 12px; background:#fbbf24; color:black; border-radius:6px; text-decoration:none; font-weight:bold;">
+                Editar
+            </a>
+
+            <!-- Eliminar -->
+            <a href="{% url 'eliminar_producto' producto.id %}"
+               onclick="return confirm('¿Seguro que quieres eliminar este producto?')" 
+               style="padding:8px 12px; background:#e11d48; color:white; border-radius:6px; text-decoration:none; font-weight:bold;">
+                Eliminar
+            </a>
+
+        </div>
+    </div>
     {% endfor %}
-</ul>
-<a href="{% url 'inicio' %}">Volver</a>
+
+</div>
+
+<div style="text-align:center; margin-top:40px;">
+    <a href="{% url 'inicio' %}" 
+       style="padding:10px 20px; background:#0a5eff; color:white; border-radius:6px; text-decoration:none; font-weight:bold;">
+        Volver
+    </a>
+</div>
+
 {% endblock %}

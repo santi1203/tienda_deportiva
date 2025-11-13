@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tienda-deportiva
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn tienda_deportiva.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: tienda_deportiva.settings
+      - key: PYTHON_VERSION
+        value: 3.12
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
