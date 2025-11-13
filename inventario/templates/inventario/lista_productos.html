@@ -1,0 +1,13 @@
+{% extends 'inventario/base.html' %}
+{% block content %}
+<h2>Listado de Productos</h2>
+<ul>
+    {% for producto in productos %}
+        <li>
+            <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a>
+            ({{ producto.categoria }})
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'inicio' %}">Volver</a>
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Deportiva</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #0a5eff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        main {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+            font-size: 16px;
+        }
+
+        .btn-blue {
+            background-color: #0a5eff;
+        }
+
+        .btn-blue:hover {
+            background-color: #0044cc;
+        }
+
+        .btn-yellow {
+            background-color: #fbbf24;
+            color: black;
+        }
+
+        .btn-yellow:hover {
+            background-color: #f59e0b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Tienda Deportiva
+    </header>
+
+    <main>
+        <h1>Bienvenido a la tienda</h1>
+
+        <div class="btn-container">
+            <a href="{% url 'crear_producto' %}" class="btn btn-blue">Agregar Producto</a>
+            <a href="{% url 'lista_productos' %}" class="btn btn-yellow">Ver Productos</a>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Tienda Deportiva
+    </footer>
+
+</body>
+</html>
