@@ -1,71 +1,59 @@
-<h1>Lista de Productos</h1>
+{% extends 'inventario/base.html' %}
+{% block content %}
 
-<ul class="producto-lista">
+<h1 style="text-align:center; margin-bottom:30px;">Lista de Productos</h1>
+
+<!-- Botón para agregar producto -->
+<div style="text-align:center; margin-bottom:20px;">
+    <a href="{% url 'crear_producto' %}" 
+       style="padding:10px 20px; background:#0a5eff; color:white; border-radius:6px; text-decoration:none; font-weight:bold;">
+        Agregar Producto
+    </a>
+</div>
+
+<!-- Lista de productos -->
+<div style="
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+">
     {% for p in productos %}
-        <li>
-            <span class="nombre">{{ p.nombre }}</span> – 
-            <span class="precio">${{ p.precio }}</span>
-        </li>
-    {% empty %}
-        <li>No hay productos</li>
-    {% endfor %}
-</ul>
-
-<style>
-    /* Estilos generales */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
+    <div style="
+        background: white;
         padding: 20px;
-    }
-
-    h1 {
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         text-align: center;
-        color: #2c3e50;
-        margin-bottom: 25px;
-    }
+    ">
+        <h3 style="margin-bottom:10px;">{{ p.nombre }}</h3>
+        <p style="margin-bottom:15px; color:#666;">Categoría: {{ p.categoria }}</p>
+        <p style="margin-bottom:15px; font-weight:bold; color:#27ae60;">${{ p.precio }}</p>
 
-    /* Lista de productos */
-    .producto-lista {
-        list-style: none; /* Quitar viñetas */
-        padding: 0;
-        max-width: 600px;
-        margin: 0 auto; /* Centrar la lista */
-    }
+        <div style="display:flex; justify-content:center; gap:10px;">
+            <!-- Ver Detalle -->
+            <a href="{% url 'detalle_producto' p.id %}" 
+               style="padding:8px 12px; background:#0a5eff; color:white; border-radius:6px; text-decoration:none; font-weight:bold;">
+                Ver
+            </a>
 
-    .producto-lista li {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 12px 20px;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
+            <!-- Editar -->
+            <a href="{% url 'editar_producto' p.id %}" 
+               style="padding:8px 12px; background:#fbbf24; color:black; border-radius:6px; text-decoration:none; font-weight:bold;">
+                Editar
+            </a>
 
-    /* Efecto hover */
-    .producto-lista li:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+            <!-- Eliminar -->
+            <a href="{% url 'eliminar_producto' p.id %}" 
+               onclick="return confirm('¿Seguro que quieres eliminar este producto?')" 
+               style="padding:8px 12px; background:#e11d48; color:white; border-radius:6px; text-decoration:none; font-weight:bold;">
+                Eliminar
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <p style="text-align:center; color:#999; font-style:italic;">No hay productos</p>
+    {% endfor %}
+</div>
 
-    /* Estilos de nombre y precio */
-    .nombre {
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-    .precio {
-        color: #27ae60;
-        font-weight: bold;
-    }
-
-    /* Mensaje de lista vacía */
-    .producto-lista li:empty {
-        text-align: center;
-        color: #999;
-        font-style: italic;
-    }
-</style>
+{% endblock %}
