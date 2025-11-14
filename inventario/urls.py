@@ -13,5 +13,5 @@ urlpatterns = [
     path('categoria/crear/', views.crear_categoria, name='crear_categoria'),
 
     #Vista genérica
-    path('productos/', ProductoListView.as_view(), name='productos_generica'),
+    path('productos/', ProductoListView.as_view(), name='lista_productos'),
 ]
